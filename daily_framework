@@ -1,0 +1,113 @@
+import React from 'react';
+import { Clock, BookOpen, Activity, Focus } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+
+const ExecutionFramework = () => {
+  return (
+    <div className="p-6 max-w-4xl mx-auto">
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold mb-2">Daily Execution Framework</h1>
+        <p className="text-gray-600">Optimized 3-Hour Productivity Block</p>
+      </div>
+
+      <div className="grid gap-6">
+        {/* Traditional vs Optimized Comparison */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <Card className="p-6 bg-gray-50">
+            <h2 className="text-xl font-semibold mb-4 flex items-center">
+              <Clock className="mr-2 text-gray-500" size={24} />
+              Traditional Approach
+              <span className="ml-2 text-sm font-normal text-gray-500">(4 Hours)</span>
+            </h2>
+            <div className="space-y-4">
+              <div className="flex items-start space-x-4">
+                <div className="w-16 text-center text-sm font-medium text-gray-500">1hr</div>
+                <div className="flex-1 p-3 bg-blue-50 rounded-lg">
+                  <div className="font-medium">Input</div>
+                  <div className="text-sm text-gray-600">Reading & Learning</div>
+                </div>
+              </div>
+              <div className="flex items-start space-x-4">
+                <div className="w-16 text-center text-sm font-medium text-gray-500">1hr</div>
+                <div className="flex-1 p-3 bg-green-50 rounded-lg">
+                  <div className="font-medium">Movement</div>
+                  <div className="text-sm text-gray-600">Walking or Weightlifting</div>
+                </div>
+              </div>
+              <div className="flex items-start space-x-4">
+                <div className="w-16 text-center text-sm font-medium text-gray-500">2hrs</div>
+                <div className="flex-1 p-3 bg-purple-50 rounded-lg">
+                  <div className="font-medium">Deep Work</div>
+                  <div className="text-sm text-gray-600">Uninterrupted Focus Time</div>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-6 bg-white border-2 border-blue-200">
+            <h2 className="text-xl font-semibold mb-4 flex items-center">
+              <Clock className="mr-2 text-blue-500" size={24} />
+              Optimized Approach
+              <span className="ml-2 text-sm font-normal text-blue-500">(3 Hours)</span>
+            </h2>
+            <div className="space-y-4">
+              <div className="flex items-start space-x-4">
+                <div className="w-16 text-center text-sm font-medium text-gray-500">1hr</div>
+                <div className="flex-1 p-4 bg-gradient-to-r from-blue-50 to-green-50 rounded-lg border border-blue-100">
+                  <div className="font-medium">Combined Input & Movement</div>
+                  <div className="text-sm text-gray-600 mt-1">
+                    <div className="flex items-center">
+                      <BookOpen size={16} className="mr-2 text-blue-500" />
+                      Audiobooks & Lectures
+                    </div>
+                    <div className="flex items-center mt-1">
+                      <Activity size={16} className="mr-2 text-green-500" />
+                      Walking
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-start space-x-4">
+                <div className="w-16 text-center text-sm font-medium text-gray-500">2hrs</div>
+                <div className="flex-1 p-4 bg-purple-50 rounded-lg border border-purple-100">
+                  <div className="font-medium flex items-center">
+                    <Focus size={16} className="mr-2 text-purple-500" />
+                    Deep Work Block
+                  </div>
+                  <div className="text-sm text-gray-600 mt-1">
+                    <ul className="list-disc list-inside">
+                      <li>Uninterrupted focus time</li>
+                      <li>No distractions</li>
+                      <li>High-value tasks</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        {/* Key Benefits */}
+        <Card className="p-6 bg-green-50">
+          <h2 className="text-xl font-semibold mb-4">Key Benefits</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 bg-white rounded-lg">
+              <h3 className="font-medium mb-2">Time Efficiency</h3>
+              <p className="text-sm text-gray-600">Save 1 hour by combining input and movement</p>
+            </div>
+            <div className="p-4 bg-white rounded-lg">
+              <h3 className="font-medium mb-2">Dual Processing</h3>
+              <p className="text-sm text-gray-600">Learn while staying active and healthy</p>
+            </div>
+            <div className="p-4 bg-white rounded-lg">
+              <h3 className="font-medium mb-2">Focused Execution</h3>
+              <p className="text-sm text-gray-600">2 hours of pure, uninterrupted deep work</p>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </div>
+  );
+};
+
+export default ExecutionFramework;
