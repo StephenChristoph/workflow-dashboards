@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Execution Planner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            padding: 24px;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+
+        .header p {
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        .date-picker {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 24px;
+        }
+
+        .time-block {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .time-block.combined {
+            background: linear-gradient(135deg, #e3f2fd 0%, #e8f5e9 100%);
+        }
+
+        .time-block.deep-work {
+            background: #f3e5f5;
+        }
+
+        .block-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .block-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .time-indicator {
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            color: #666;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .task-list {
+            list-style: none;
+            margin-top: 12px;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 6px;
+            margin-bottom: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .task-item:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .task-checkbox {
+            margin-right: 12px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .task-text {
+            flex: 1;
+            color: #333;
+        }
+
+        .task-text.completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .task-delete {
+            visibility: hidden;
+            border: none;
+            background: none;
+            color: #ff4444;
+            cursor: pointer;
+            padding: 4px 8px;
+            font-size: 1.1rem;
+        }
+
+        .task-item:hover .task-delete {
+            visibility: visible;
+        }
+
+        .add-task {
+            width: 100%;
+            padding: 8px;
+            border: 1px dashed #ccc;
+            border-radius: 6px;
+            background: transparent;
+            color: #666;
+            margin-top: 12px;
+            cursor: text;
+        }
+
+        .add-task:focus {
+            outline: none;
+            border-style: solid;
+            border-color: #2196f3;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 24px;
+            color: #666;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Execution Planner</h1>
+            <p>Plan your optimized 3-hour productivity block</p>
+            <input type="date" class="date-picker" id="datePicker">
+        </div>
+
+        <div class="time-block combined">
+            <div class="block-header">
+                <div class="block-title">Hour 1: Combined Input & Movement</div>
+                <div class="time-indicator">60 minutes</div>
+            </div>
+            <div class="task-container">
+                <ul class="task-list" id="tasks-1"></ul>
+                <input type="text" class="add-task" placeholder="+ Add learning and movement plan..." data-block="1">
+            </div>
+        </div>
+
+        <div class="time-block deep-work">
+            <div class="block-header">
+                <div class="block-title">Hour 2: Deep Work (Part 1)</div>
+                <div class="time-indicator">60 minutes</div>
+            </div>
+            <div class="task-container">
+                <ul class="task-list" id="tasks-2"></ul>
+                <input type="text" class="add-task" placeholder="+ Add first deep work focus..." data-block="2">
+            </div>
+        </div>
+
+        <div class="time-block deep-work">
+            <div class="block-header">
+                <div class="block-title">Hour 3: Deep Work (Part 2)</div>
+                <div class="time-indicator">60 minutes</div>
+            </div>
+            <div class="task-container">
+                <ul class="task-list" id="tasks-3"></ul>
+                <input type="text" class="add-task" placeholder="+ Add second deep work focus..." data-block="3">
+            </div>
+        </div>
+
+        <div class="footer">
+            Tasks auto-save • Click checkboxes to mark complete • Hover to delete
+        </div>
+    </div>
+
+    <script>
+        // Set date picker to today
+        const datePicker = document.getElementById('datePicker');
+        datePicker.valueAsDate = new Date();
+
+        // Task management
+        let tasks = {
+            1: [], // Hour 1 tasks
+            2: [], // Hour 2 tasks
+            3: []  // Hour 3 tasks
+        };
+
+        // Load tasks from localStorage
+        function loadTasks() {
+            const date = datePicker.value;
+            const saved = localStorage.getItem(`tasks-${date}`);
+            if (saved) {
+                tasks = JSON.parse(saved);
+            } else {
+                tasks = { 1: [], 2: [], 3: [] };
+            }
+            renderAllTasks();
+        }
+
+        // Save tasks to localStorage
+        function saveTasks() {
+            const date = datePicker.value;
+            localStorage.setItem(`tasks-${date}`, JSON.stringify(tasks));
+        }
+
+        // Create task HTML
+        function createTaskElement(task, blockId, index) {
+            return `
+                <li class="task-item">
+                    <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''}
+                        onchange="toggleTask(${blockId}, ${index})">
+                    <span class="task-text ${task.completed ? 'completed' : ''}">${task.text}</span>
+                    <button class="task-delete" onclick="deleteTask(${blockId}, ${index})">×</button>
+                </li>
+            `;
+        }
+
+        // Render tasks for a specific block
+        function renderTasks(blockId) {
+            const taskList = document.getElementById(`tasks-${blockId}`);
+            taskList.innerHTML = tasks[blockId]
+                .map((task, index) => createTaskElement(task, blockId, index))
+                .join('');
+        }
+
+        // Render all task blocks
+        function renderAllTasks() {
+            for (let i = 1; i <= 3; i++) {
+                renderTasks(i);
+            }
+        }
+
+        // Add new task
+        function addTask(blockId, text) {
+            tasks[blockId].push({
+                text: text,
+                completed: false
+            });
+            renderTasks(blockId);
+            saveTasks();
+        }
+
+        // Toggle task completion
+        function toggleTask(blockId, index) {
+            tasks[blockId][index].completed = !tasks[blockId][index].completed;
+            renderTasks(blockId);
+            saveTasks();
+        }
+
+        // Delete task
+        function deleteTask(blockId, index) {
+            tasks[blockId].splice(index, 1);
+            renderTasks(blockId);
+            saveTasks();
+        }
+
+        // Add task input handlers
+        document.querySelectorAll('.add-task').forEach(input => {
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && e.target.value.trim()) {
+                    const blockId = e.target.dataset.block;
+                    addTask(blockId, e.target.value.trim());
+                    e.target.value = '';
+                }
+            });
+        });
+
+        // Date change handler
+        datePicker.addEventListener('change', loadTasks);
+
+        // Initial load
+        loadTasks();
+    </script>
+</body>
+</html>
