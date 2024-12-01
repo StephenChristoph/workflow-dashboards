@@ -142,6 +142,8 @@
             padding: 32px;
             border-radius: 12px;
             position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
         }
 
         .close-button {
@@ -152,6 +154,46 @@
             cursor: pointer;
             background: none;
             border: none;
+            color: #666;
+        }
+
+        .modal h2 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #eee;
+            color: #1a1a1a;
+        }
+
+        .modal h3 {
+            font-size: 1.1rem;
+            margin: 24px 0 12px;
+            color: #333;
+        }
+
+        .modal h4 {
+            font-size: 1rem;
+            margin: 16px 0 8px;
+            color: #444;
+        }
+
+        .modal p {
+            margin-bottom: 12px;
+            line-height: 1.5;
+            color: #666;
+        }
+
+        .modal ul {
+            margin: 8px 0 16px 24px;
+        }
+
+        .modal ul ul {
+            margin: 4px 0 8px 24px;
+        }
+
+        .modal li {
+            margin-bottom: 4px;
+            line-height: 1.5;
             color: #666;
         }
     </style>
@@ -165,7 +207,7 @@
 
         <div class="grid">
             <!-- Week 1 -->
-            <div class="card week-1">
+            <div class="card week-1" onclick="openModal(1)">
                 <div class="card-header">
                     <div class="week-number">1</div>
                     <div class="week-title">Writing Cycle</div>
@@ -189,7 +231,7 @@
             </div>
 
             <!-- Week 2 -->
-            <div class="card week-2">
+            <div class="card week-2" onclick="openModal(2)">
                 <div class="card-header">
                     <div class="week-number">2</div>
                     <div class="week-title">Iteration Cycle</div>
@@ -213,7 +255,7 @@
             </div>
 
             <!-- Week 3 -->
-            <div class="card week-3">
+            <div class="card week-3" onclick="openModal(3)">
                 <div class="card-header">
                     <div class="week-number">3</div>
                     <div class="week-title">Feedback Cycle</div>
@@ -236,7 +278,7 @@
             </div>
 
             <!-- Week 4 -->
-            <div class="card week-4">
+            <div class="card week-4" onclick="openModal(4)">
                 <div class="card-header">
                     <div class="week-number">4</div>
                     <div class="week-title">Video Production</div>
@@ -261,7 +303,7 @@
             </div>
 
             <!-- Week 5 -->
-            <div class="card week-5">
+            <div class="card week-5" onclick="openModal(5)">
                 <div class="card-header">
                     <div class="week-number">5</div>
                     <div class="week-title">Ideation & Review</div>
@@ -284,7 +326,7 @@
             </div>
 
             <!-- Week 6 -->
-            <div class="card week-6">
+            <div class="card week-6" onclick="openModal(6)">
                 <div class="card-header">
                     <div class="week-number">6</div>
                     <div class="week-title">Reset & Begin</div>
@@ -310,44 +352,196 @@
         <div class="footer">
             ↻ Cycle repeats with insights from previous iteration
         </div>
-    </div>.modal h2 {
-    font-size: 1.5rem;
-    margin-bottom: 16px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid #eee;
-    color: #1a1a1a;
-}
 
-.modal h3 {
-    font-size: 1.1rem;
-    margin: 24px 0 12px;
-    color: #333;
-}
+<!-- Week 1 Modal -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <button class="close-button" onclick="closeModal(1)">&times;</button>
+                <h2>Week 1: Writing Cycle</h2>
+                
+                <h3>Purpose: Create foundational content across priority verticals.</h3>
 
-.modal h4 {
-    font-size: 1rem;
-    margin: 16px 0 8px;
-    color: #444;
-}
+                <h4>Output:</h4>
+                <ul>
+                    <li>Write long-form content pieces based on abundant ideas from your own work and audience needs.</li>
+                    <li>Draft articles or posts for:
+                        <ul>
+                            <li>Substack</li>
+                            <li>Medium</li>
+                            <li>Typeshare</li>
+                        </ul>
+                    </li>
+                </ul>
 
-.modal p {
-    margin-bottom: 12px;
-    line-height: 1.5;
-    color: #666;
-}
+                <h4>Outcome:</h4>
+                <ul>
+                    <li>Schedule written content across corresponding platforms using a scheduling tool.</li>
+                    <li>Ensure consistent tone and branding across all verticals.</li>
+                </ul>
+            </div>
+        </div>
 
-.modal ul {
-    margin: 8px 0 16px 24px;
-}
+        <!-- Week 2 Modal -->
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <button class="close-button" onclick="closeModal(2)">&times;</button>
+                <h2>Week 2: Iteration Cycle</h2>
+                
+                <h3>Purpose: Adapt long-form content into short-form social media posts.</h3>
 
-.modal ul ul {
-    margin: 4px 0 8px 24px;
-}
+                <h4>Output:</h4>
+                <ul>
+                    <li>Produce concise written iterations of Week 1's outputs for social platforms:
+                        <ul>
+                            <li>LinkedIn posts</li>
+                            <li>X posts and threads</li>
+                            <li>BlueSky posts</li>
+                            <li>Threads posts</li>
+                        </ul>
+                    </li>
+                </ul>
 
-.modal li {
-    margin-bottom: 4px;
-    line-height: 1.5;
-    color: #666;
-}
+                <h4>Outcome:</h4>
+                <ul>
+                    <li>Schedule short-form posts using social scheduling tools.</li>
+                    <li>Tailor content to platform-specific nuances for higher engagement.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Week 3 Modal -->
+        <div id="modal3" class="modal">
+            <div class="modal-content">
+                <button class="close-button" onclick="closeModal(3)">&times;</button>
+                <h2>Week 3: Real-Time Feedback Cycle</h2>
+                
+                <h3>Purpose: Analyze performance, audience insights, and engagement.</h3>
+
+                <h4>Output:</h4>
+                <ul>
+                    <li>Monitor content performance metrics across all platforms (views, likes, shares, comments, etc.).</li>
+                    <li>Actively engage with your audience by:
+                        <ul>
+                            <li>Responding to comments and messages.</li>
+                            <li>Joining conversations around similar topics.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>Outcome:</h4>
+                <ul>
+                    <li>Document insights (e.g., audience preferences, trending themes) in Notion to guide Week 4 and future cycles.</li>
+                    <li>Make minor adjustments to scheduled posts based on early feedback if necessary.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Week 4 Modal -->
+        <div id="modal4" class="modal">
+            <div class="modal-content">
+                <button class="close-button" onclick="closeModal(4)">&times;</button>
+                <h2>Week 4: Video Production Cycle</h2>
+                
+                <h3>Purpose: Create video content iterations based on previous weeks' insights.</h3>
+
+                <h4>Output:</h4>
+                <ul>
+                    <li>Batch-record video iterations of written content from Weeks 1 and 2.</li>
+                    <li>Edit videos using AI tools to optimize for platform-specific formats.</li>
+                    <li>Create videos for:
+                        <ul>
+                            <li>YouTube</li>
+                            <li>YouTube Shorts</li>
+                            <li>TikTok</li>
+                            <li>Instagram Reels</li>
+                            <li>LinkedIn videos</li>
+                            <li>X posts</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>Outcome:</h4>
+                <ul>
+                    <li>Schedule video content across platforms using scheduling tools.</li>
+                    <li>Ensure videos align with audience feedback and platform best practices.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Week 5 Modal -->
+        <div id="modal5" class="modal">
+            <div class="modal-content">
+                <button class="close-button" onclick="closeModal(5)">&times;</button>
+                <h2>Week 5: Ideation & Review</h2>
+                
+                <h3>Purpose: Refine and prioritize content ideas while reviewing performance.</h3>
+
+                <h4>Output:</h4>
+                <ul>
+                    <li>Review engagement metrics across all platforms.</li>
+                    <li>Actively engage with audience feedback.</li>
+                    <li>Brainstorm future content based on:
+                        <ul>
+                            <li>Performance trends</li>
+                            <li>Audience interactions</li>
+                            <li>Industry trends</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>Outcome:</h4>
+                <ul>
+                    <li>Identify and prioritize ideas for the next cycle.</li>
+                    <li>Document insights to ensure continuous improvement.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Week 6 Modal -->
+        <div id="modal6" class="modal">
+            <div class="modal-content">
+                <button class="close-button" onclick="closeModal(6)">&times;</button>
+                <h2>Week 6: Reset & Begin</h2>
+                
+                <h3>Purpose: Prepare for the next content cycle while maintaining momentum.</h3>
+
+                <h4>Key Activities:</h4>
+                <ul>
+                    <li>Review all insights from previous cycle</li>
+                    <li>Update content strategy</li>
+                    <li>Prepare resources and tools</li>
+                    <li>Set specific goals for upcoming cycle</li>
+                </ul>
+
+                <h4>Preparation:</h4>
+                <ul>
+                    <li>Refresh content calendar</li>
+                    <li>Update automation workflows</li>
+                    <li>Review team assignments</li>
+                    <li>Ensure all tools are ready</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>  
+
+<script>
+        // Function to open modal
+        function openModal(weekNum) {
+            document.getElementById('modal' + weekNum).style.display = 'block';
+        }
+
+        // Function to close modal
+        function closeModal(weekNum) {
+            document.getElementById('modal' + weekNum).style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
