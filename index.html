@@ -39,18 +39,24 @@
         }
 
         .tools-grid {
-            display: grid;
-            gap: 24px;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* Forces 2 columns */
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-        .tool-card {
-            background: white;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
+.tool-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 100%;                           /* Makes all cards same height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
         .tool-card:hover {
             transform: translateY(-2px);
